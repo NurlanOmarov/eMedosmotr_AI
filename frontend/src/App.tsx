@@ -17,7 +17,9 @@ import type {
   AIAnalysis,
   RiskLevel,
   CheckDoctorConclusionResponse,
-  Severity
+  Severity,
+  FitnessCategory,
+  AnalysisStatus
 } from './types'
 import './App.css'
 
@@ -373,8 +375,8 @@ function App() {
             specialty: result.specialty,
             doctorCategory: result.doctor_category as FitnessCategory | null,
             aiRecommendedCategory: result.ai_recommended_category as FitnessCategory | null,
-            status: result.status,
-            riskLevel: result.risk_level as RiskLevel,
+            status: result.status as AnalysisStatus,
+            riskLevel: result.risk_level as RiskLevel | null,
             article: result.article || 0,
             point: result.article || 0,
             subpoint: result.subpoint || '',
