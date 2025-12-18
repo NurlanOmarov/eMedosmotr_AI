@@ -183,13 +183,44 @@ docker exec -it emedosmotr_db psql -U admin -d emedosmotr
 
 ## Production деплой
 
+### Автоматический деплой через GitHub Actions (рекомендуется)
+
+При каждом push в ветку `main` GitHub Actions автоматически развернет изменения на production сервер.
+
+**Настройка GitHub Secrets:**
+
+1. Перейдите в Settings → Secrets and variables → Actions
+2. Добавьте следующие secrets:
+   - `SERVER_HOST` = 69.197.178.118
+   - `SERVER_USER` = administrator
+   - `SERVER_PASSWORD` = ваш_пароль_от_сервера
+
+**Workflow файл:** [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+
+**Как это работает:**
+1. Вы редактируете код локально
+2. Делаете `git add .`, `git commit -m "описание"`, `git push`
+3. GitHub Actions автоматически:
+   - Подключается к серверу
+   - Делает `git pull`
+   - Пересобирает Docker контейнеры
+   - Перезапускает приложение
+4. Изменения появляются на https://iproject.sbs
+
+### Ручной деплой
+
 Для production используйте `docker-compose.production.yml` с production Dockerfile'ами:
 
 ```bash
 docker-compose -f docker-compose.production.yml up -d --build
 ```
 
-Или используйте скрипт `deploy.sh` на сервере.
+Или используйте скрипт `deploy.sh` на сервере:
+
+```bash
+cd /var/www/emedosmotr
+./deploy.sh
+```
 
 Подробные инструкции по деплою смотрите в документации.
 
