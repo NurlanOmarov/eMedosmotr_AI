@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест API - Сохраненные результаты</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1e1e1e; color: #d4d4d4; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+        pre { background: #2d2d2d; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .success { color: #4ec9b0; }
+        .error { color: #f48771; }
+        .info { color: #569cd6; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест API - Сохраненные результаты AI анализа</h1>
+
+    <div>
+        <h2>1. Проверка сохраненных результатов</h2>
+        <button onclick="testGetSavedResults()">Загрузить сохраненные результаты (ПРИЗЫВНИК #11)</button>
+        <pre id="result1"></pre>
+    </div>
+
+    <div>
+        <h2>2. Проверка всех призывников</h2>
+        <button onclick="testGetConscripts()">Получить список призывников</button>
+        <pre id="result2"></pre>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        const CONSCRIPT_DRAFT_ID = '1068ed31-719d-48ff-9b9b-1133e3ea5735'; // ТЕСТОВЫЙ ПРИЗЫВНИК #11
+
+        async function testGetSavedResults() {
+            const output = document.getElementById('result1');
+            output.innerHTML = '<span class="info">⏳ Загрузка...</span>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/v1/validation/saved-analysis/${CONSCRIPT_DRAFT_ID}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                output.innerHTML = `
+<span class="success">✅ Успешно загружено!</span>
+
+<span class="info">Количество результатов:</span> ${data.total_count}
+
+<span class="info">Призывник draft_id:</span> ${CONSCRIPT_DRAFT_ID}
+
+<span class="info">Результаты:</span>
+${JSON.stringify(data, null, 2)}
+                `.trim();
+
+            } catch (error) {
+                output.innerHTML = `<span class="error">❌ Ошибка: ${error.message}</span>`;
+            }
+        }
+
+        async function testGetConscripts() {
+            const output = document.getElementById('result2');
+            output.innerHTML = '<span class="info">⏳ Загрузка...</span>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/v1/conscripts/?limit=5`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                output.innerHTML = `
+<span class="success">✅ Успешно загружено!</span>
+
+<span class="info">Всего призывников:</span> ${data.total}
+
+<span class="info">Первые 5 призывников:</span>
+${data.conscripts.map(c => `
+  • ${c.full_name}
+    ID: ${c.id}
+    IIN: ${c.iin}
+`).join('\n')}
+                `.trim();
+
+            } catch (error) {
+                output.innerHTML = `<span class="error">❌ Ошибка: ${error.message}</span>`;
+            }
+        }
+
+        // Автоматический тест при загрузке страницы
+        window.onload = () => {
+            console.log('🧪 Тестовая страница загружена');
+            console.log('API URL:', API_URL);
+            console.log('Conscript Draft ID:', CONSCRIPT_DRAFT_ID);
+        };
+    </script>
+</body>
+</html>

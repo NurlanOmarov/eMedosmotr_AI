@@ -1,0 +1,10 @@
+{
+  "conscript_draft_id": "1f2dc1a1-26fe-42ef-8756-0c84bc80f93a",
+  "specialty": "ТестАвтоEmbedding",
+  "specialty_ru": "Тестовый специалист",
+  "conclusion_text": "Тестовое заключение для проверки автоматической генерации embeddings при создании осмотра через API",
+  "diagnosis_text": "Тестовый диагноз",
+  "icd10_code": "Z00.0",
+  "doctor_category": "А",
+  "examination_date": "2025-12-10"
+}

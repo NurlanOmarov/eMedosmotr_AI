@@ -1,0 +1,169 @@
+{
+  "date": "2025-12-09",
+  "total_articles": 89,
+  "articles_with_errors": 1,
+  "total_errors": 9,
+  "articles_with_warnings": 3,
+  "errors": {
+    "65": [
+      {
+        "subpoint": 1,
+        "graph": "graph_3",
+        "current": "Е",
+        "expected": "Д"
+      },
+      {
+        "subpoint": 2,
+        "graph": "graph_1",
+        "current": "Е",
+        "expected": "Д"
+      },
+      {
+        "subpoint": 2,
+        "graph": "graph_2",
+        "current": "Е",
+        "expected": "Д"
+      },
+      {
+        "subpoint": 2,
+        "graph": "graph_3",
+        "current": "Д",
+        "expected": "В-ИНД"
+      },
+      {
+        "subpoint": 3,
+        "graph": "graph_3",
+        "current": "В-ИНД",
+        "expected": "Б"
+      },
+      {
+        "subpoint": 3,
+        "graph": "graph_4",
+        "current": "НГ",
+        "expected": "ИНД"
+      },
+      {
+        "subpoint": 4,
+        "graph": "graph_1",
+        "current": "Д",
+        "expected": "Б"
+      },
+      {
+        "subpoint": 4,
+        "graph": "graph_2",
+        "current": "Д",
+        "expected": "Б"
+      },
+      {
+        "subpoint": 4,
+        "graph": "graph_4",
+        "current": "ИНД",
+        "expected": "А"
+      }
+    ]
+  },
+  "warnings": {
+    "14": [
+      {
+        "num": 1,
+        "text": "1) со значительным нарушением",
+        "graph_1": "Е",
+        "graph_2": "Е",
+        "graph_3": "Д",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 2,
+        "text": "2) с умеренным нарушением",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "В-ИНД",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 3,
+        "text": "3) с незначительным нарушением",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "Б",
+        "graph_4": "ИНД"
+      },
+      {
+        "num": 4,
+        "text": "4) без нарушения функций",
+        "graph_1": "Б",
+        "graph_2": "Б",
+        "graph_3": "Б",
+        "graph_4": "А"
+      }
+    ],
+    "15": [
+      {
+        "num": 1,
+        "text": "1) со значительным нарушением зрения",
+        "graph_1": "Е",
+        "graph_2": "Е",
+        "graph_3": "Д",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 2,
+        "text": "2) с умеренным нарушением зрения",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "В",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 3,
+        "text": "3) с незначительным нарушением",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "Б",
+        "graph_4": "ИНД"
+      },
+      {
+        "num": 4,
+        "text": "4) без нарушения функций",
+        "graph_1": "Б",
+        "graph_2": "Б",
+        "graph_3": "Б",
+        "graph_4": "А"
+      }
+    ],
+    "67": [
+      {
+        "num": 1,
+        "text": "1) со значительным нарушением функций",
+        "graph_1": "Е",
+        "graph_2": "Е",
+        "graph_3": "Е",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 2,
+        "text": "2) с умеренным нарушением функций",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "Д",
+        "graph_4": "НГ"
+      },
+      {
+        "num": 3,
+        "text": "3) с незначительным нарушением функций",
+        "graph_1": "Д",
+        "graph_2": "Д",
+        "graph_3": "Б",
+        "graph_4": "ИНД"
+      },
+      {
+        "num": 4,
+        "text": "4) при наличии объективных данных без нарушения функций",
+        "graph_1": "Б",
+        "graph_2": "Б",
+        "graph_3": "Б",
+        "graph_4": "А"
+      }
+    ]
+  }
+}

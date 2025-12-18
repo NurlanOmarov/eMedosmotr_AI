@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # PostgreSQL с pgvector для векторного поиска
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: emedosmotr_db
+    environment:
+      POSTGRES_DB: emedosmotr
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d emedosmotr"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - emedosmotr_network
+
+  # FastAPI Backend
+  backend:
+    build: ./backend
+    container_name: emedosmotr_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://admin:${POSTGRES_PASSWORD:-secure_password}@postgres:5432/emedosmotr
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-secure_password}
+      - POSTGRES_DB=emedosmotr
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SECRET_KEY=emedosmotr-secret-key-change-in-production-2025
+      - AI_MODEL=gpt-4o-mini
+      - AI_TEMPERATURE=0.2
+      - AI_MAX_TOKENS=4000
+      - RAG_CHUNK_SIZE=1024
+      - RAG_TOP_K=5
+      - EMBEDDING_MODEL=text-embedding-3-small
+      - EMBEDDING_DIMENSIONS=1536
+      - ENABLE_CACHE=true
+      - CACHE_TTL_HOURS=24
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - APP_NAME=eMedosmotr AI
+      - APP_VERSION=1.0.0
+    volumes:
+      - ./backend:/app
+      - ./справочник приказ 722:/app/references
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - emedosmotr_network
+
+  # React Frontend
+  frontend:
+    build: ./frontend
+    container_name: emedosmotr_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+    networks:
+      - emedosmotr_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  emedosmotr_network:
+    driver: bridge

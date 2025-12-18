@@ -1,0 +1,173 @@
+.dentist-chart {
+  width: 100%;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.dentist-chart-legend {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.legend-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.legend-item {
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.legend-code {
+  font-weight: 600;
+  color: #007bff;
+  min-width: 20px;
+  display: inline-block;
+  text-align: center;
+}
+
+.dentist-chart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.jaw-section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+}
+
+.jaw-upper {
+  border-color: #007bff;
+}
+
+.jaw-lower {
+  border-color: #28a745;
+}
+
+.jaw-label {
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.teeth-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.teeth-side {
+  display: flex;
+  gap: 8px;
+}
+
+.teeth-divider {
+  width: 3px;
+  height: 80px;
+  background: linear-gradient(to bottom, #dee2e6, #adb5bd, #dee2e6);
+  border-radius: 2px;
+}
+
+.tooth-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.tooth-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  text-align: center;
+  min-width: 30px;
+}
+
+.tooth-status {
+  width: 100%;
+  max-width: 50px;
+  padding: 6px 4px;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tooth-status:hover:not(:disabled) {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.tooth-status:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.tooth-status:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.tooth-status-filled {
+  border-color: #28a745;
+  background: #f8fff9;
+  font-weight: 600;
+}
+
+.dentist-chart-hint {
+  margin-top: 15px;
+  padding: 10px;
+  background: #e7f3ff;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+  .dentist-chart {
+    padding: 15px;
+  }
+
+  .teeth-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .teeth-divider {
+    width: 80%;
+    height: 3px;
+  }
+
+  .teeth-side {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: block;
+    margin-bottom: 8px;
+  }
+}

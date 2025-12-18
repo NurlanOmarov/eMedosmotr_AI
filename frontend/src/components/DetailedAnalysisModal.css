@@ -1,0 +1,481 @@
+/* ============================================
+   DETAILED ANALYSIS MODAL — MEDICAL BRUTALISM
+   ============================================ */
+
+/* ============ BACKDROP & CONTAINER ============ */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: var(--z-modal);
+  backdrop-filter: blur(4px);
+}
+
+.modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) + 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  overflow-y: auto;
+}
+
+.modal {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--color-surface);
+  border: var(--border-width-medium) solid var(--color-border);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+/* ============ HEADER ============ */
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--color-text-primary);
+  border-bottom: var(--border-width-medium) solid var(--color-border);
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: white;
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+.modal-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  letter-spacing: 0.05em;
+}
+
+.modal-subtitle {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: var(--font-weight-medium);
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: var(--border-width-thin) solid rgba(255, 255, 255, 0.3);
+  color: white;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  transform: rotate(90deg);
+}
+
+/* ============ CONTENT ============ */
+
+.modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ============ SECTIONS ============ */
+
+.modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.modal-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.modal-section-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+}
+
+/* ============ SUMMARY GRID ============ */
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+}
+
+.summary-card-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.summary-card-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* ============ STATUS INDICATOR ============ */
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width-medium) solid;
+  margin-top: var(--space-2);
+}
+
+.status-indicator-match {
+  background: var(--color-primary-alpha);
+  border-color: var(--color-primary);
+}
+
+.status-indicator-mismatch {
+  background: var(--color-danger-alpha);
+  border-color: var(--color-danger);
+}
+
+.status-indicator-partial_mismatch {
+  background: var(--color-warning-alpha);
+  border-color: var(--color-warning);
+}
+
+.status-indicator-review_required {
+  background: var(--color-warning-alpha);
+  border-color: var(--color-warning);
+}
+
+.status-indicator-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.status-indicator-match .status-indicator-icon {
+  color: var(--color-primary);
+}
+
+.status-indicator-mismatch .status-indicator-icon {
+  color: var(--color-danger);
+}
+
+.status-indicator-partial_mismatch .status-indicator-icon {
+  color: var(--color-warning);
+}
+
+.status-indicator-review_required .status-indicator-icon {
+  color: var(--color-warning);
+}
+
+.status-indicator-text {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+}
+
+.status-indicator-match .status-indicator-text {
+  color: var(--color-primary);
+}
+
+.status-indicator-mismatch .status-indicator-text {
+  color: var(--color-danger);
+}
+
+.status-indicator-partial_mismatch .status-indicator-text {
+  color: var(--color-warning);
+}
+
+.status-indicator-review_required .status-indicator-text {
+  color: var(--color-warning);
+}
+
+/* ============ RISK BADGE ============ */
+
+.risk-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width-thin) solid var(--risk-color, var(--color-border));
+  background: color-mix(in srgb, var(--risk-color, transparent) 10%, transparent);
+}
+
+.risk-badge-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--risk-color, var(--color-border));
+  flex-shrink: 0;
+}
+
+.risk-badge-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--risk-color, var(--color-text-primary));
+  letter-spacing: 0.05em;
+}
+
+/* ============ REASONING BOX ============ */
+
+.reasoning-box {
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border-left: 3px solid var(--color-primary);
+}
+
+.reasoning-text {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* ============ DETAILS BOX ============ */
+
+.details-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+.details-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.details-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.details-value {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* ============ PARAMETERS GRID ============ */
+
+.parameters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.parameter-chip {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+.parameter-key {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.parameter-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============ ALTERNATIVES LIST ============ */
+
+.alternatives-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.alternative-chip {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-primary-alpha);
+  border: var(--border-width-thin) solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============ CONFIDENCE METER ============ */
+
+.confidence-meter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.confidence-bar {
+  height: 32px;
+  background: var(--color-bg);
+  border: var(--border-width-medium) solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: var(--color-primary);
+  position: relative;
+}
+
+.confidence-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confidence-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.confidence-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* ============ FOOTER ============ */
+
+.modal-footer {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.modal-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width-medium) solid;
+  background: var(--color-surface);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-btn-secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.modal-btn-secondary:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-brutal);
+}
+
+.modal-btn-primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-alpha);
+}
+
+.modal-btn-primary:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-brutal);
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 1200px) {
+  .modal {
+    max-width: 90vw;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-container {
+    padding: var(--space-3);
+  }
+
+  .modal-content {
+    padding: var(--space-4);
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+}
