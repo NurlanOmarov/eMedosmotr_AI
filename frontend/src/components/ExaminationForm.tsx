@@ -258,7 +258,7 @@ export default function ExaminationForm({ currentUser, conscriptId, onOpenAIAnal
     setIsEditing(false)
   }
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string, value: string | Record<string, string>) => {
     setFormData((prev: any) => ({
       ...prev,
       [field]: value,

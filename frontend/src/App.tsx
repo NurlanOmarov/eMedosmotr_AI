@@ -371,8 +371,8 @@ function App() {
           // Преобразуем сохраненные результаты в формат ConscriptAnalysis
           const aiAnalyses: AIAnalysis[] = savedResults.results.map(result => ({
             specialty: result.specialty,
-            doctorCategory: result.doctor_category,
-            aiRecommendedCategory: result.ai_recommended_category as any,
+            doctorCategory: result.doctor_category as FitnessCategory | null,
+            aiRecommendedCategory: result.ai_recommended_category as FitnessCategory | null,
             status: result.status,
             riskLevel: result.risk_level as RiskLevel,
             article: result.article || 0,
