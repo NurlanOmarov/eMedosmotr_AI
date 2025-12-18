@@ -60,7 +60,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.production
       args:
-        VITE_API_URL: https://iproject.sbs/api
+        VITE_API_URL: https://iproject.sbs
     container_name: emedosmotr_frontend_prod
     ports:
       - "0.0.0.0:5173:80"
