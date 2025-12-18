@@ -59,13 +59,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.production
+      args:
+        VITE_API_URL: https://iproject.sbs/api
     container_name: emedosmotr_frontend_prod
     ports:
       - "0.0.0.0:5173:80"
     depends_on:
       - backend
-    environment:
-      - VITE_API_URL=https://iproject.sbs/api
     networks:
       - emedosmotr_network
     restart: unless-stopped
