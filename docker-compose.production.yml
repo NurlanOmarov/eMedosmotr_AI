@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile.production
     container_name: emedosmotr_backend_prod
     ports:
-      - "127.0.0.1:8000:8000"
+      - "0.0.0.0:8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -61,7 +61,7 @@ services:
       dockerfile: Dockerfile.production
     container_name: emedosmotr_frontend_prod
     ports:
-      - "127.0.0.1:5173:80"
+      - "0.0.0.0:5173:80"
     depends_on:
       - backend
     environment:
