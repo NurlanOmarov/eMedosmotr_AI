@@ -22,9 +22,10 @@ async def lifespan(app: FastAPI):
     print(f"📊 База данных: {settings.POSTGRES_DB}")
     print(f"🤖 AI модель: {settings.AI_MODEL}")
 
-    # Создание таблиц (опционально, в продакшене используйте Alembic)
-    # async with engine.begin() as conn:
-    #     await conn.run_sync(Base.metadata.create_all)
+    # Создание таблиц при старте приложения
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    print("✅ Таблицы базы данных созданы")
 
     yield
 
