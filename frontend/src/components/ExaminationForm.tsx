@@ -5,6 +5,8 @@ import ICD10Search from './ICD10Search'
 import DentistChart from './DentistChart'
 import './ExaminationForm.css'
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+
 interface ICD10Code {
   code: string
   name: string
@@ -92,7 +94,7 @@ export default function ExaminationForm({ currentUser, conscriptId, onOpenAIAnal
   useEffect(() => {
     const fetchRequiredSpecialists = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/ai/required-specialists')
+        const response = await fetch(`${API_BASE_URL}/api/v1/ai/required-specialists`)
         const data = await response.json()
         setRequiredSpecialists(data.required_specialists || [])
       } catch (error) {
@@ -297,14 +299,14 @@ export default function ExaminationForm({ currentUser, conscriptId, onOpenAIAnal
 
       // Проверяем, существует ли уже осмотр (обновление или создание)
       const checkResponse = await fetch(
-        `http://localhost:8000/api/v1/examinations/${conscriptId}/${selectedDoctor}`
+        `${API_BASE_URL}/api/v1/examinations/${conscriptId}/${selectedDoctor}`
       )
 
       let response
       if (checkResponse.ok) {
         // Осмотр существует - обновляем (PUT)
         response = await fetch(
-          `http://localhost:8000/api/v1/examinations/${conscriptId}/${selectedDoctor}`,
+          `${API_BASE_URL}/api/v1/examinations/${conscriptId}/${selectedDoctor}`,
           {
             method: 'PUT',
             headers: {
@@ -315,7 +317,7 @@ export default function ExaminationForm({ currentUser, conscriptId, onOpenAIAnal
         )
       } else {
         // Осмотр не существует - создаем (POST)
-        response = await fetch('http://localhost:8000/api/v1/examinations', {
+        response = await fetch(`${API_BASE_URL}/api/v1/examinations`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
