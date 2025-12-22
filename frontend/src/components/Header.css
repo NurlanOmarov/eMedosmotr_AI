@@ -382,15 +382,169 @@
 
 @media (max-width: 1200px) {
   .header-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
   }
 
-  .header-section {
-    justify-content: center;
+  .header-center {
+    display: none;
+  }
+
+  .logo-image {
+    height: 48px;
+  }
+
+  .logo-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .user-selector {
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-grid {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    padding-left: 64px; /* Место для кнопки гамбургер-меню */
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .logo-title {
+    font-size: var(--font-size-base);
+  }
+
+  .logo-subtitle {
+    font-size: 10px;
   }
 
   .header-right {
-    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  /* Упрощаем селектор пользователя на мобильных */
+  .user-selector {
+    min-width: auto;
+    padding: var(--space-2);
+  }
+
+  .user-info {
+    display: none; /* Скрываем текст на маленьких экранах */
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Кнопки в шапке */
+  .header-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Меню пользователя на мобильных */
+  .user-menu {
+    position: fixed !important;
+    width: calc(100vw - 40px);
+    max-width: none;
+    right: auto !important;
+    left: 20px !important;
+    top: auto !important;
+    bottom: 20px;
+    transform: none;
+  }
+
+  .user-menu-item-name {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+  }
+
+  .header-border {
+    height: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-grid {
+    padding: var(--space-2);
+    padding-left: 56px;
+  }
+
+  .logo-text {
+    gap: 0;
+  }
+
+  .logo-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .logo-subtitle {
+    display: none; /* Скрываем подзаголовок на очень маленьких экранах */
+  }
+
+  .logo-image {
+    height: 36px;
+  }
+
+  .user-selector {
+    padding: var(--space-1);
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .user-avatar svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .header-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .header-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .user-menu {
+    position: fixed !important;
+    width: calc(100vw - 32px);
+    max-width: none;
+    right: auto !important;
+    left: 16px !important;
+    top: auto !important;
+    bottom: 16px;
+    transform: none;
+  }
+
+  .user-menu-item {
+    padding: var(--space-3) var(--space-2);
+    min-height: 56px;
+  }
+
+  .user-menu-item-name {
+    font-size: 0.85rem;
+    overflow-wrap: break-word;
+  }
+
+  .user-menu-item-specialty {
+    font-size: 0.75rem;
   }
 }

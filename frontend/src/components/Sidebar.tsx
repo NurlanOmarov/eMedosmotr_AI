@@ -82,6 +82,7 @@ const sidebarItems: SidebarItem[] = [
 export default function Sidebar({ currentUser, activeSection, onSectionChange }: SidebarProps) {
   const [activeId, setActiveId] = useState(activeSection)
   const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   // Фильтруем элементы по ролям
   const filteredItems = sidebarItems.filter(item => {
@@ -89,13 +90,52 @@ export default function Sidebar({ currentUser, activeSection, onSectionChange }:
     return item.roleAccess.includes(currentUser.role)
   })
 
+  // Проверяем, мобильное ли устройство
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+
   return (
-    <motion.aside
-      className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-    >
+    <>
+      {/* Мобильная кнопка меню - СНАРУЖИ sidebar */}
+      <button
+        className="sidebar-mobile-toggle"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
+      >
+        {mobileOpen ? (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M18 6L6 18M6 6L18 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="square"
+            />
+          </svg>
+        ) : (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M3 12H21M3 6H21M3 18H21"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="square"
+            />
+          </svg>
+        )}
+      </button>
+
+      {/* Backdrop для мобильных */}
+      {mobileOpen && (
+        <div
+          className="sidebar-mobile-backdrop"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      <motion.aside
+        className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''} ${mobileOpen ? 'sidebar-mobile-open' : ''}`}
+        initial={isMobile ? false : { x: -100, opacity: 0 }}
+        animate={isMobile ? {} : { x: 0, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
+      >
       {/* Collapse toggle */}
       <button
         className="sidebar-toggle"
@@ -142,6 +182,7 @@ export default function Sidebar({ currentUser, activeSection, onSectionChange }:
             onClick={() => {
               setActiveId(item.id)
               onSectionChange(item.id)
+              setMobileOpen(false) // Закрываем меню на мобильных при выборе
             }}
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -205,5 +246,6 @@ export default function Sidebar({ currentUser, activeSection, onSectionChange }:
         </motion.div>
       )}
     </motion.aside>
+    </>
   )
 }

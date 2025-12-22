@@ -50,7 +50,50 @@
 
 @media (max-width: 768px) {
   .app-layout {
-    flex-direction: column;
+    flex-direction: row; /* Сохраняем горизонтальный layout, sidebar станет fixed */
+    gap: 0;
+    padding: var(--space-3);
+  }
+
+  .app-main {
+    gap: var(--space-3);
+    width: 100%;
+  }
+
+  .coming-soon {
+    min-height: 40vh;
+    padding: var(--space-6);
+  }
+
+  .coming-soon h2 {
+    font-size: 2rem;
+  }
+
+  .coming-soon p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-layout {
+    padding: var(--space-2);
+  }
+
+  .app-main {
+    gap: var(--space-2);
+  }
+
+  .coming-soon {
+    padding: var(--space-4);
+    min-height: 30vh;
+  }
+
+  .coming-soon h2 {
+    font-size: 1.5rem;
+  }
+
+  .coming-soon p {
+    font-size: 0.9rem;
   }
 }
 
