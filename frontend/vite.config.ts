@@ -8,16 +8,11 @@ export default defineConfig({
     host: '0.0.0.0',
     strictPort: false,
     hmr: {
-      clientPort: 5173
+      clientPort: 5173,
+      protocol: 'wss',
+      host: 'iproject.sbs'
     },
-    // Allow all hosts for Docker/proxy access
-    allowedHosts: [
-      '.iproject.sbs',
-      'iproject.sbs',
-      'www.iproject.sbs',
-      'emedosmotr_frontend',
-      '172.19.0.4',
-      '69.197.178.118'
-    ]
+    // Disable host check for proxy
+    proxy: {}
   }
 })
