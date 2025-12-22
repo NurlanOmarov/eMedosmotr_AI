@@ -1,20 +1,32 @@
 # Frontend Dockerfile для eMedosmotr AI
-FROM node:20-alpine
 
-# Установка рабочей директории
+# Build stage
+FROM node:20-alpine AS builder
+
 WORKDIR /app
 
-# Копирование package.json и package-lock.json
+# Copy package files
 COPY package*.json ./
 
-# Установка зависимостей
-RUN npm install
+# Install dependencies
+RUN npm ci
 
-# Копирование кода приложения
+# Copy source code
 COPY . .
 
-# Экспорт порта Vite dev server
-EXPOSE 5173
+# Build for production
+RUN npm run build
 
-# Команда по умолчанию (переопределяется в docker-compose.yml)
-CMD ["npm", "run", "dev"]
+# Production stage
+FROM nginx:alpine
+
+# Copy built files to nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

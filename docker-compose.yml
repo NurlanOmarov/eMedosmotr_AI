@@ -65,15 +65,9 @@ services:
     build: ./frontend
     container_name: emedosmotr_frontend
     ports:
-      - "5173:5173"
+      - "5173:80"
     depends_on:
       - backend
-    environment:
-      - VITE_API_URL=http://localhost:8000
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    command: npm run dev -- --host 0.0.0.0
     networks:
       - emedosmotr_network
 
