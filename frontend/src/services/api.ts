@@ -11,7 +11,8 @@ import type {
   CheckDoctorConclusionResponse
 } from '../types'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+// В production используем пустую строку (относительный путь), в dev - localhost
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? '' : 'http://localhost:8000')
 
 class APIClient {
   private client: AxiosInstance
